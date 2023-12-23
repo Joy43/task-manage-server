@@ -51,8 +51,8 @@ app.get('/task',async(req,res)=>{
 })
 
     // -------------------connect mogodb---------------------------------------------
-    // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
+   
+    // await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     
@@ -61,7 +61,7 @@ app.get('/task',async(req,res)=>{
 run().catch(console.dir);
 
 app.get('/', (req, res) => {
-    res.send('tech is sitting on')
+    res.send('task is sitting on')
   })
   
   app.listen(port, () => {
