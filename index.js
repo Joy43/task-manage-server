@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require ('express');
 const { MongoClient, ServerApiVersion,ObjectId } = require('mongodb');
 // const axios = require('axios');
 const app = express();
@@ -33,9 +33,22 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
-    // await client.connect();
+     // ------------connect database and access----------
+const taskcollection=client.db('taskDb').collection('task');
 
+// -----------post tasks------------------------
+app.post('/task',async(req,res)=>{
+  const newtask=req.body;
+  console.log(newtask)
+  const result=await taskcollection.insertOne(newtask);
+  res.send(result);
+})
+
+// -----------get mathod-----------
+app.get('/task',async(req,res)=>{
+  const result=await taskcollection.find().toArray();
+  res.send(result);
+})
 
     // -------------------connect mogodb---------------------------------------------
     // Send a ping to confirm a successful connection
@@ -52,5 +65,5 @@ app.get('/', (req, res) => {
   })
   
   app.listen(port, () => {
-    console.log(`tech is sitting on port ${port}`);
+    console.log(` task manage  is sitting on port ${port}`);
   })
